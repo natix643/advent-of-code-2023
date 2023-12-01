@@ -28,18 +28,12 @@ object Day01b {
         val builder = StringBuilder()
 
         for (index in 0..<line.length) {
-            var isWord = false
-            for (word in wordsToDigits.keys) {
-                if (line.startsWith(word, index)) {
-                    builder.append(wordsToDigits[word])
-                    isWord = true
-                }
-            }
-            if (!isWord && line[index].isDigit()) {
-                builder.append(line[index])
+            val word = wordsToDigits.keys.find { line.startsWith(it, index) }
+            when {
+                word != null -> builder.append(wordsToDigits[word])
+                line[index].isDigit() -> builder.append(line[index])
             }
         }
-
         return builder.toString()
     }
 
