@@ -4,21 +4,6 @@ import kotlin.math.min
 
 object Day04b : Day04() {
 
-    data class Card(
-        val id: Int,
-        val matches: Int,
-        var copies: Int = 1
-    )
-
-    val cards = Input.day04().mapIndexed { index, line ->
-        val numberPart = line.split(":")[1]
-        val (winningNumbers, myNumbers) = numberPart.split("|").map(Day04a::parseNumbers)
-        Card(
-            id = index + 1,
-            matches = myNumbers.count { it in winningNumbers }
-        )
-    }
-
     fun multiplyCards(cards: List<Card>) {
         for (i in 0..<cards.size - 1) {
             val card = cards[i]
@@ -33,7 +18,7 @@ object Day04b : Day04() {
         }
     }
 
-    val result = cards.apply { multiplyCards(this) }
+    val result = parseCards(Input.day04()).apply { multiplyCards(this) }
         .sumOf { it.copies }
 
 }

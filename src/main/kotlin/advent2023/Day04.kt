@@ -11,5 +11,20 @@ open class Day04 {
         Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
     """.trimIndent().lines()
 
+    data class Card(
+        val id: Int,
+        val matches: Int,
+        var copies: Int = 1
+    )
+
     fun parseNumbers(s: String) = s.trim().split(Regex("\\s+")).map { it.toInt() }.toSet()
+
+    fun parseCards(lines: List<String>): List<Card> = lines.mapIndexed { index, line ->
+        val numberPart = line.split(":")[1]
+        val (winningNumbers, myNumbers) = numberPart.split("|").map(::parseNumbers)
+        Card(
+            id = index + 1,
+            matches = myNumbers.count { it in winningNumbers }
+        )
+    }
 }
