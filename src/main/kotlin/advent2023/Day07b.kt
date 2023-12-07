@@ -1,11 +1,15 @@
+@file:Suppress("UNUSED_DESTRUCTURED_PARAMETER_ENTRY")
+
 package advent2023
+
+import advent2023.Day07.HandType.*
 
 object Day07b : Day07() {
 
+    const val JOKER = 'J'
+
     val cardStrengths: Map<Char, Int> =
         "J23456789TQKA".toCharArray().withIndex().associate { it.value to it.index }
-
-    const val JOKER = 'J'
 
     fun parseHandType(cards: String): HandType {
         val countsByCard = cards
@@ -23,16 +27,16 @@ object Day07b : Day07() {
         }
 
         val cardsByCount = countsByNormalCard.toList().groupBy(
-            { (_, count) -> count },
-            { (card, _) -> card }
+            { (card, count) -> count },
+            { (card, count) -> card }
         )
 
         return when {
-            5 in cardsByCount -> HandType.FIVE_OF_A_KIND
-            4 in cardsByCount -> HandType.FOUR_OF_A_KIND
-            3 in cardsByCount -> if (2 in cardsByCount) HandType.FULL_HOUSE else HandType.THREE_OF_A_KIND
-            2 in cardsByCount -> if (cardsByCount[2]?.size == 2) HandType.TWO_PAIR else HandType.ONE_PAIR
-            else -> HandType.HIGH_CARD
+            5 in cardsByCount -> FIVE_OF_A_KIND
+            4 in cardsByCount -> FOUR_OF_A_KIND
+            3 in cardsByCount -> if (2 in cardsByCount) FULL_HOUSE else THREE_OF_A_KIND
+            2 in cardsByCount -> if (cardsByCount[2]?.size == 2) TWO_PAIR else ONE_PAIR
+            else -> HIGH_CARD
         }
     }
 
