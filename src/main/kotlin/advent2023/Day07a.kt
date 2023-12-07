@@ -37,16 +37,9 @@ object Day07a : Day07() {
         )
     }
 
-    fun handComparator(): Comparator<Hand> {
-        val cardSelectors = (0..4).map { index ->
-            { hand: Hand -> cardStrengths[hand.cards[index]] }
-        }.toTypedArray()
-        return compareBy({ it.type }, *cardSelectors)
-    }
-
     val hands = Input.day07().map { parseHand(it) }
     val result = hands
-        .sortedWith(handComparator())
+        .sortedWith(handComparator(cardStrengths))
         .mapIndexed { index, card -> (index + 1) * card.bid }
         .sum()
 }

@@ -26,4 +26,11 @@ open class Day07 {
         val type: HandType
     )
 
+    fun handComparator(cardStrengths: Map<Char, Int>): Comparator<Hand> {
+        val cardSelectors = (0..4).map { index ->
+            { hand: Hand -> cardStrengths[hand.cards[index]] }
+        }.toTypedArray()
+        return compareBy({ it.type }, *cardSelectors)
+    }
+
 }
