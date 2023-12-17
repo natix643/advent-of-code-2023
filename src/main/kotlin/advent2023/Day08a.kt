@@ -22,39 +22,11 @@ object Day08a : Day08() {
         ZZZ = (ZZZ, ZZZ)
     """.trimIndent().lines()
 
-    const val START = "AAA"
-    const val END = "ZZZ"
-
     val lines = Input.day08()
+    val instructions = parseInstructions(lines)
+    val network = parseNetwork(lines)
 
-    val instructions = sequence {
-        while (true) {
-            yieldAll(lines[0].toList())
-        }
-    }
-
-    val network: Map<String, Node> =
-        lines.drop(2).map { parseNode(it) }.associateBy { it.name }
-
-    fun navigate(): Int {
-        var steps = 0
-        var current = network.getValue(START)
-
-        for (instruction in instructions) {
-            if (current.name == END) {
-                break
-            }
-            current = when (instruction) {
-                'L' -> network.getValue(current.left)
-                'R' -> network.getValue(current.right)
-                else -> throw Exception("$instruction")
-            }
-            steps++
-        }
-        return steps
-    }
-
-    val result = navigate()
+    val result = navigate(network, instructions, "AAA") { it == "ZZZ" }
 }
 
 fun main() {
