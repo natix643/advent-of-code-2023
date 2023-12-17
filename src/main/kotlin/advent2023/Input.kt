@@ -11,6 +11,7 @@ object Input {
     fun day07() = readLines("Day07.txt")
     fun day08() = readLines("Day08.txt")
     fun day09() = readLines("Day09.txt")
+    fun day15() = readLines("Day15.txt")
 
     private fun readLines(filename: String): List<String> {
         return javaClass.getResourceAsStream(filename)!!.bufferedReader().use {
