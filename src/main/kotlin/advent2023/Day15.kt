@@ -6,9 +6,9 @@ open class Day15 {
 
     val hashmapSize = 256
 
-    fun hash(step: String): Int {
+    fun hash(string: String): Int {
         var result = 0
-        for (char in step) {
+        for (char in string) {
             result = ((result + char.code) * 17) % hashmapSize
         }
         return result
