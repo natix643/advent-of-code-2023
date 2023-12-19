@@ -11,6 +11,7 @@ object Input {
     fun day07() = readLines("Day07.txt")
     fun day08() = readLines("Day08.txt")
     fun day09() = readLines("Day09.txt")
+    fun day10() = readLines("Day10.txt")
     fun day11() = readLines("Day11.txt")
     fun day15() = readLines("Day15.txt")
 
